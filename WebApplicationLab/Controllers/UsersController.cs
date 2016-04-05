@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using WebApplicationLab.Models;
@@ -14,7 +15,30 @@ namespace WebApplicationLab.Controllers
         public ActionResult Index()
         {
             var users = db.Users.Include(u => u.Role).ToList();
+
+            List<Role> roles = db.Roles.ToList();
+            roles.Insert(0, new Role {Name = "Все", Id = 0 });
+            ViewBag.Roles = new SelectList(roles, "Id", "Name");
+
             return View(users);
+        }
+
+        [HttpPost]
+        public ActionResult Index(int roleId)
+        {
+            if (roleId == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            IEnumerable<User> allUsers = from user in db.Users.Include(u => u.Role)
+                where user.RoleId == roleId
+                select user;
+
+            List<Role> roles = db.Roles.ToList();
+            roles.Insert(0, new Role { Name = "Все", Id = 0 });
+            ViewBag.Roles = new SelectList(roles, "Id", "Name");
+
+            return View(allUsers.ToList());
         }
 
         [HttpGet]
@@ -22,8 +46,7 @@ namespace WebApplicationLab.Controllers
         public ActionResult Edit(int id)
         {
             User user = db.Users.Find(id);
-            //SelectList departments = new SelectList(db.Departments, "Id", "Name", user.DepartmentId);
-            //ViewBag.Departments = departments;
+
             SelectList roles = new SelectList(db.Roles, "Id", "Name", user.RoleId);
             ViewBag.Roles = roles;
 
