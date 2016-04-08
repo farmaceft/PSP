@@ -13,9 +13,10 @@ namespace WebApplicationLab.Models
         
         [Required]
         [Display(Name = "Пароль")]
-        [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
+        [MaxLength(128, ErrorMessage = "Превышена максимальная длина записи")]
+
         public string Password { get; set; }
-        
+        public string Salt { get; set; }
         [Required]
         [Display(Name = "Статус")]
         public int RoleId { get; set; }
