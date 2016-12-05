@@ -1,0 +1,27 @@
+﻿@model WebApplicationLab.Models.Phone
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление телефона</h2>
+
+<h3>@Model.Company.Name @Model.Name @Model.Memory Gb</h3>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Удалить" class="btn btn-default"/>
+            </div>
+        </div>
+    }
+</div>
+
+<div>    
+    @Html.ActionLink("Назад к Телефону", "Details", new { Id = Model.Id } )
+</div>

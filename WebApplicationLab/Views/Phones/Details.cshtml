@@ -1,0 +1,66 @@
+﻿@model WebApplicationLab.Models.Phone
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("admin"))
+{
+    <div class="edit-delete">
+        @Html.ActionLink("Изменить", "Edit", new {Id = Model.Id})
+        @Html.ActionLink("Удалить", "Delete", new {Id = Model.Id})
+    </div>
+}
+
+<div class="phone-details">
+    <img src="@Model.Image" alt="Image" />
+    <h2>@Model.Name</h2>
+</div>
+
+<table border="4" bordercolor="black" cellpadding="20" width="1150">
+    <tr>
+        <td align="center">Дата выхода на рынок</td>
+        <td align="center">@Model.Date</td>
+    </tr>
+    <tr>
+        <td align="center">Производитель</td>
+        <td align="center">@Model.Company.Name</td>
+    </tr>
+    <tr>
+        <td align="center">Операционная система</td>
+        <td align="center">@Model.SystemOperation.Name</td>
+    </tr>
+    <tr>
+        <td align="center">Батарея</td>
+        <td align="center">@Model.Battery.Name мА*ч</td>
+    </tr>
+    <tr>
+        <td align="center">Камера</td>
+        <td align="center">@Model.Camera.Name Мп</td>
+    </tr>
+    <tr>
+        <td align="center">Цвет</td>
+        <td align="center">@Model.Color.Name</td>
+    </tr>
+    <tr>
+        <td align="center">Память</td>
+        <td align="center">@Model.Memory Gb</td>
+    </tr>
+    <tr>
+        <td align="center">Оперативная память</td>
+        <td align="center">@Model.OZU.Name Gb</td>
+    </tr>
+    <tr>
+        <td align="center">Размер экрана</td>
+        <td align="center">@Model.ScreenSize.Name''</td>
+    </tr>
+    <tr>
+        <td align="center">Цена</td>
+        <td align="center">@Model.Price rub.</td>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Назад к Каталогу", "Index")
+</div>

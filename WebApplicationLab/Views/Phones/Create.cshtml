@@ -1,0 +1,173 @@
+﻿@model WebApplicationLab.Models.Phone
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="css-create-phone">
+    
+    <h2>Добавить новый телефон</h2>
+    
+    @using (Html.BeginForm("Create", "Phones", FormMethod.Post, htmlAttributes: new { @class = "filter-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name ,"Название", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Company, "Производитель", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CompanyId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.CompanyId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, "Цена", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Price)
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image, "Изображение", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.Image)
+                    <input type="file" name="upload" id="uploadFile" /><br>
+                    <input type="submit" id="upload" value="Загрузить" />
+                    @Html.ValidationMessageFor(model => model.Image)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Описание", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SystemOperation, "Операционная система", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SystemOperationId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.SystemOperationId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScreenSize, "Диагональ экрана", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ScreenSizeId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.ScreenSizeId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, "Дата выхода", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date)
+                    @Html.ValidationMessageFor(model => model.Date)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OZU, "Оперативная память", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OZUId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.OZUId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Color, "Цвет", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ColorId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.ColorId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Camera, "Количество точек матрицы", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CameraId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.CameraId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Battery, "Емкость батареи", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("BatteryId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.BatteryId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Memory, "Память", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Memory)
+                    @Html.ValidationMessageFor(model => model.Memory)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="button-create">
+                        <input type="submit" value="Добавить" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Назад к Каталогу", "Index")
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    $('#upload').on('click', function (e) {
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Upload", "Phones")',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        document.querySelector('#Image').value = result;
+                    },
+                    error: function (xhr, status, p3) {
+                        alert(xhr.responseText);
+                    }
+                });
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    });
+    </script>
+}

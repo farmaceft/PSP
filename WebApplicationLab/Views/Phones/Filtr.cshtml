@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Filtr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="css-filter">
+    
+    <h2>Выберите критерии поиска</h2>
+
+    @using (Html.BeginForm("Filtr", "Phones", FormMethod.Post, htmlAttributes: new {@class = "filter-form"}))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Производитель", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("CompanyId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Оперативная память", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("OZUId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Цвет", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("ColorId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Операционная система", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("SystemOperationId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Диагональ экрана", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("ScreenSizeId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Емкость батареи", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("BatteryId", String.Empty)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Количество точек матрицы", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("CameraId", String.Empty)
+                </div>
+            </div>
+        </div>
+        <div class="submit-filter">
+            <input type="submit" value="Найти" class="btn btn-default"/>
+        </div>
+    }
+</div>
